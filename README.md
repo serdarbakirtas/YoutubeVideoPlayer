@@ -1,6 +1,5 @@
-# YoutubeVideoPlayer
+# YoutubeVideoPlayer / SwiftUI
 
-# SwiftUI
 # Overview
 ***
 + Xcode 12.03
