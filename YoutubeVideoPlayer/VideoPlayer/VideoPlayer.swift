@@ -6,7 +6,6 @@
 //  Copyright © 2020 FlavorOfCities. All rights reserved.
 //
 
-import AVKit
 import SwiftUI
 import WebKit
 
