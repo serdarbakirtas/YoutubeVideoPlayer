@@ -40,9 +40,10 @@ struct WebViewContainer: UIViewRepresentable {
     private(set) var webview: WKWebView
     private(set) var videoID: String
     private(set) var videoPlayer: VideoPlayer
+    private(set) var currentTime: Float
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self, videoplayer: videoPlayer)
+        Coordinator(self, videoplayer: videoPlayer, currentTime: currentTime)
     }
 
     func makeUIView(context: UIViewRepresentableContext<WebViewContainer>) -> WKWebView {
@@ -92,10 +93,12 @@ class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
 
     var parent: WebViewContainer
     var videoPlayer: VideoPlayer
+    var currentTime: Float
 
-    init(_ parent: WebViewContainer, videoplayer: VideoPlayer) {
+    init(_ parent: WebViewContainer, videoplayer: VideoPlayer, currentTime: Float) {
         self.parent = parent
         self.videoPlayer = videoplayer
+        self.currentTime = currentTime
     }
 
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String,
@@ -134,15 +137,14 @@ class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
             data = PlayerStateType(rawValue: time) ?? .unknownCode
         }
         
-        getDuration { [weak self] duration, error in
-            if error == nil {
-                self?.videoPlayer.duration = duration
-            }
-        }
-
         switch callBackType {
         case .ready:
-            break
+            getDuration { [weak self] duration, error in
+                if error == nil {
+                    self?.videoPlayer.duration = duration
+                }
+            }
+            videoPlayer.seek(toSeconds: currentTime, allowSeekAhead: true)
         case .stateChange:
             notifyPlayerStateChange(playerStateType: data)
         case .playbackQualityChange:
@@ -181,7 +183,7 @@ class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
         return true
     }
     
-    private func getDuration(_ completionHandler: ((_ duration: TimeInterval, _ error: Error?) -> Void)? = nil) { 
+    private func getDuration(_ completionHandler: ((_ duration: TimeInterval, _ error: Error?) -> Void)? = nil) {
         videoPlayer.stringFromEvaluatingJavaScript("player.getDuration();", completionHandler: { response, error in
             if let completionHandler = completionHandler {
                 if let error = error {

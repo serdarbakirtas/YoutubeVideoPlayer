@@ -12,13 +12,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        let contentView = YoutubePlayerView(viewModel: YoutubePlayerViewModel(videoId: "HTdd8QxifbY"))
+        
+        let videoPlayerState = VideoPlayerState()
+        let contentView = YoutubePlayerView(viewModel: YoutubePlayerViewModel(videoId: "U_tyfMUSGo4"))
 
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(videoPlayerState))
             self.window = window
             window.makeKeyAndVisible()
         }
@@ -30,4 +31,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {}
     func sceneDidEnterBackground(_ scene: UIScene) {}
 }
-

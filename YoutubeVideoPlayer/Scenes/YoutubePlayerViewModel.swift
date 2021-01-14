@@ -15,6 +15,6 @@ final class YoutubePlayerViewModel: ObservableObject {
     
     init(videoId: String) {
         self.videoId = videoId
-        player = VideoPlayer(videoID: videoId)
+        player = VideoPlayer(videoID: videoId, isFullScreen: true)
     }
 }

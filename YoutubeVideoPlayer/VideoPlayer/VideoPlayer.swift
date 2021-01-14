@@ -6,6 +6,7 @@
 //  Copyright © 2020 FlavorOfCities. All rights reserved.
 //
 
+import AVKit
 import SwiftUI
 import WebKit
 
@@ -21,8 +22,10 @@ struct VideoPlayer: View {
     
     private(set) var webview: WKWebView
     private(set) var videoID: String
+    private(set) var isFullScreen: Bool
     
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var videoPlayerState: VideoPlayerState
     
     @State var isSound: Bool = true
     @State var showingDetail: Bool = false
@@ -32,7 +35,8 @@ struct VideoPlayer: View {
     
     var body: some View {
         ZStack {
-            WebViewContainer(webview: webview, videoID: videoID, videoPlayer: self)
+            WebViewContainer(webview: webview, videoID: videoID, videoPlayer: self,
+                             currentTime: videoPlayerState.currentTime)
             HStack {
                 Button(action: {
                     isPlaying ? pause() : play()
@@ -51,22 +55,49 @@ struct VideoPlayer: View {
                     Image(systemName: isSound ? "speaker.3.fill" : "speaker.fill")
                         .foregroundColor(.orange)
                 })
+
+                if isFullScreen {
+                    Button(action: {
+                        pause()
+                        videoPlayerState.currentTime = time
+                        showingDetail = isFullScreen
+                    }, label: {
+                        Image(systemName: "arrow.up.left.and.arrow.down.right")
+                            .foregroundColor(.orange)
+                    })
+                } else {
+                    Button(action: {
+                        videoPlayerState.currentTime = time
+                        presentationMode.wrappedValue.dismiss()
+                        AppUtility.lockOrientation(.all)
+                    }, label: {
+                        Image(systemName: "arrow.down.right.and.arrow.up.left")
+                            .foregroundColor(.orange)
+                    })
+                }
             }
             .padding()
-            .offset(x: 0, y: 125)
+            .offset(x: 0, y: 130)
         }
+        .fullScreenCover(isPresented: $showingDetail, onDismiss: {
+            seek(toSeconds: videoPlayerState.currentTime, allowSeekAhead: true)
+        }, content: {
+            VideoPlayerContainer(videoID: videoID, isFullScreen: false)
+                .edgesIgnoringSafeArea(.all)
+        })
     }
     
-    init(videoID: String) {
+    init(videoID: String, isFullScreen: Bool) {
         self.videoID = videoID
         self.webview = WKWebView(frame: .zero, configuration: configuration)
+        self.isFullScreen = isFullScreen
     }
     
     private func sliderEditingChanged(editingStarted: Bool) {
         editingStarted ? pause() : seek(toSeconds: time, allowSeekAhead: true)
     }
     
-    private func play() {
+    func play() {
         stringFromEvaluatingJavaScript("player.playVideo();")
     }
 
@@ -86,10 +117,12 @@ struct VideoPlayer: View {
         stringFromEvaluatingJavaScript("player.unMute();")
     }
 
-    private func seek(toSeconds seekToSeconds: Float, allowSeekAhead: Bool) {
+    func seek(toSeconds seekToSeconds: Float, allowSeekAhead: Bool) {
         let allowSeekAheadValue = String(allowSeekAhead)
         let command = "player.seekTo(\(seekToSeconds), \(allowSeekAheadValue));"
-        stringFromEvaluatingJavaScript(command, completionHandler: nil)
+        stringFromEvaluatingJavaScript(command) { _, _ in
+            play()
+        }
     }
     
     func stringFromEvaluatingJavaScript(_ jsToExecute: String,

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F08EFDC25B0578B0068D19B /* VideoPlayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F08EFDB25B0578B0068D19B /* VideoPlayerContainer.swift */; };
+		9F08EFE225B057E20068D19B /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F08EFE125B057E20068D19B /* AppUtility.swift */; };
+		9F08EFED25B058140068D19B /* VideoPlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F08EFEC25B058140068D19B /* VideoPlayerState.swift */; };
 		9F9B466B25A9072B0020F55F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9B466A25A9072B0020F55F /* AppDelegate.swift */; };
 		9F9B466D25A9072B0020F55F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9B466C25A9072B0020F55F /* SceneDelegate.swift */; };
 		9F9B467125A9072C0020F55F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F9B467025A9072C0020F55F /* Assets.xcassets */; };
@@ -39,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9F08EFDB25B0578B0068D19B /* VideoPlayerContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerContainer.swift; sourceTree = "<group>"; };
+		9F08EFE125B057E20068D19B /* AppUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
+		9F08EFEC25B058140068D19B /* VideoPlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerState.swift; sourceTree = "<group>"; };
 		9F9B466725A9072B0020F55F /* YoutubeVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9B466A25A9072B0020F55F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F9B466C25A9072B0020F55F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F08EFE025B057B30068D19B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9F08EFE125B057E20068D19B /* AppUtility.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		9F9B465E25A9072A0020F55F = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				9F9B46B925A90A340020F55F /* Youtube-iframe-player.html */,
+				9F08EFE025B057B30068D19B /* Utilities */,
 				9F9B46AA25A907980020F55F /* VideoPlayer */,
 				9F9B469D25A9074D0020F55F /* Scenes */,
 				9F9B466A25A9072B0020F55F /* AppDelegate.swift */,
@@ -159,6 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				9F9B46B125A908AA0020F55F /* VideoPlayer.swift */,
+				9F08EFDB25B0578B0068D19B /* VideoPlayerContainer.swift */,
+				9F08EFEC25B058140068D19B /* VideoPlayerState.swift */,
 				9F9B46B225A908AA0020F55F /* WebViewContainer.swift */,
 			);
 			path = VideoPlayer;
@@ -295,12 +312,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F08EFE225B057E20068D19B /* AppUtility.swift in Sources */,
+				9F08EFDC25B0578B0068D19B /* VideoPlayerContainer.swift in Sources */,
 				9F9B46B425A908AA0020F55F /* VideoPlayer.swift in Sources */,
 				9F9B46AC25A907AB0020F55F /* YoutubePlayerViewModel.swift in Sources */,
 				9F9B466B25A9072B0020F55F /* AppDelegate.swift in Sources */,
 				9F9B466D25A9072B0020F55F /* SceneDelegate.swift in Sources */,
 				9F9B46B525A908AA0020F55F /* WebViewContainer.swift in Sources */,
 				9F9B46A025A9077C0020F55F /* YoutubePlayerView.swift in Sources */,
+				9F08EFED25B058140068D19B /* VideoPlayerState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -453,7 +473,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
