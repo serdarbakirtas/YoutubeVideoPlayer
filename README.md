@@ -3,7 +3,7 @@
 # Overview
 ***
 + Xcode 12.03
-+ Supported iOS versions: 13+
++ Supported iOS versions: 14+
 + SwiftUI
 + Supported devices: iPhone - iPad (portrait and landscape orientations)
 
