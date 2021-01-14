@@ -11,4 +11,5 @@
 + Fullscreen mode
 
 # Screens
-<img src="https://github.com/serdarbakirtas/YoutubeVideoPlayer/blob/release/Screenshots/portrait.png" alt="HTML5 Icon" width="276" height="598"> <img src="https://github.com/serdarbakirtas/YoutubeVideoPlayer/blob/release/Screenshots/landscape.png" alt="HTML5 Icon" width="276" height="598">
+<img src="https://github.com/serdarbakirtas/YoutubeVideoPlayer/blob/release/Screenshots/portrait.png" alt="HTML5 Icon" width="276" height="598">
+<img src="https://github.com/serdarbakirtas/YoutubeVideoPlayer/blob/release/Screenshots/landscape.png" alt="HTML5 Icon" width="598" height="276">
