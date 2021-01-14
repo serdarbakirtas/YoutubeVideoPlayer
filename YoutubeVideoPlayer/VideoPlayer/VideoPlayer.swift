@@ -97,7 +97,7 @@ struct VideoPlayer: View {
         editingStarted ? pause() : seek(toSeconds: time, allowSeekAhead: true)
     }
     
-    func play() {
+    private func play() {
         stringFromEvaluatingJavaScript("player.playVideo();")
     }
 
