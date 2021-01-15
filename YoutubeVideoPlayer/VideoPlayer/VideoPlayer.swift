@@ -59,7 +59,7 @@ struct VideoPlayer: View {
                 Button(action: {
                     isFullScreen ? dismissFullScreenPlayer() : showFullScreenPlayer()
                 }, label: {
-                    Image(systemName: isFullScreen ? "arrow.up.left.and.arrow.down.right" : "arrow.down.right.and.arrow.up.left")
+                    Image(systemName: isFullScreen ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right")
                         .foregroundColor(.orange)
                 })
             }
