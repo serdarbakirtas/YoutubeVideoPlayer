@@ -10,7 +10,7 @@ import SwiftUI
 struct VideoPlayerContainer: View {
         
     private(set) var videoID: String
-    private(set) var isFullScreen: Bool = false
+    private(set) var isFullScreen: Bool
     
     var body: some View {
         VideoPlayer(videoID: videoID, isFullScreen: isFullScreen)

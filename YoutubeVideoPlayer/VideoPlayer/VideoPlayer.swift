@@ -27,11 +27,11 @@ struct VideoPlayer: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var videoPlayerState: VideoPlayerState
     
-    @State var isSound: Bool = true
-    @State var showingDetail: Bool = false
-    @State var isPlaying: Bool = false
+    @State var isSound = true
+    @State var showingDetail = false
+    @State var isPlaying = false
     @State var time: Float = 0
-    @State var duration: Double = 0.0
+    @State var duration = 0.0
     
     var body: some View {
         ZStack {
@@ -59,7 +59,7 @@ struct VideoPlayer: View {
                 Button(action: {
                     isFullScreen ? dismissFullScreenPlayer() : showFullScreenPlayer()
                 }, label: {
-                    Image(systemName: isFullScreen ? "arrow.up.left.and.arrow.down.right" : "arrow.down.right.and.arrow.up.left")
+                    Image(systemName: isFullScreen ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right")
                         .foregroundColor(.orange)
                 })
             }
