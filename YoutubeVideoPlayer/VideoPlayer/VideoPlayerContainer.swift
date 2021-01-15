@@ -19,7 +19,7 @@ struct VideoPlayerContainer: View {
     init(videoID: String, isFullScreen: Bool) {
         self.videoID = videoID
         self.isFullScreen = isFullScreen
-        self.isFullScreen ? AppUtility.lockOrientation(.all) : AppUtility.lockOrientation(.landscapeLeft)
+        self.isFullScreen ? AppUtility.lockOrientation(.landscapeLeft) : AppUtility.lockOrientation(.all)
     }
 }
 

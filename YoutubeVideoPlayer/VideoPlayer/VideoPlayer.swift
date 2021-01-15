@@ -56,25 +56,12 @@ struct VideoPlayer: View {
                         .foregroundColor(.orange)
                 })
 
-                if isFullScreen {
-                    Button(action: {
-                        pause()
-                        videoPlayerState.currentTime = time
-                        showingDetail = isFullScreen
-                    }, label: {
-                        Image(systemName: "arrow.up.left.and.arrow.down.right")
-                            .foregroundColor(.orange)
-                    })
-                } else {
-                    Button(action: {
-                        videoPlayerState.currentTime = time
-                        presentationMode.wrappedValue.dismiss()
-                        AppUtility.lockOrientation(.all)
-                    }, label: {
-                        Image(systemName: "arrow.down.right.and.arrow.up.left")
-                            .foregroundColor(.orange)
-                    })
-                }
+                Button(action: {
+                    isFullScreen ? dismissFullScreenPlayer() : showFullScreenPlayer()
+                }, label: {
+                    Image(systemName: isFullScreen ? "arrow.up.left.and.arrow.down.right" : "arrow.down.right.and.arrow.up.left")
+                        .foregroundColor(.orange)
+                })
             }
             .padding()
             .offset(x: 0, y: 130)
@@ -82,7 +69,7 @@ struct VideoPlayer: View {
         .fullScreenCover(isPresented: $showingDetail, onDismiss: {
             seek(toSeconds: videoPlayerState.currentTime, allowSeekAhead: true)
         }, content: {
-            VideoPlayerContainer(videoID: videoID, isFullScreen: false)
+            VideoPlayerContainer(videoID: videoID, isFullScreen: true)
                 .edgesIgnoringSafeArea(.all)
         })
     }
@@ -91,6 +78,18 @@ struct VideoPlayer: View {
         self.videoID = videoID
         self.webview = WKWebView(frame: .zero, configuration: configuration)
         self.isFullScreen = isFullScreen
+    }
+    
+    private func showFullScreenPlayer() {
+        pause()
+        videoPlayerState.currentTime = time
+        showingDetail = !isFullScreen
+    }
+    
+    private func dismissFullScreenPlayer() {
+        videoPlayerState.currentTime = time
+        presentationMode.wrappedValue.dismiss()
+        AppUtility.lockOrientation(.all)
     }
     
     private func sliderEditingChanged(editingStarted: Bool) {
